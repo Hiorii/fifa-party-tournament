@@ -1,0 +1,151 @@
+@use 'variables' as *;
+
+// ─── Buttons ──────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $sp-2;
+  padding: 12px 24px;
+  border-radius: $radius-full;
+  font-family: $font-display;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  white-space: nowrap;
+
+  &--primary {
+    background: $color-accent;
+    color: $color-bg;
+    box-shadow: $shadow-accent;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 32px $color-accent-glow;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-accent;
+    border: 2px solid $color-accent;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 229, 255, 0.08);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-text-muted;
+    border: 1px solid $color-border;
+
+    &:hover:not(:disabled) {
+      background: $color-surface;
+      color: $color-text;
+    }
+  }
+
+  &--danger {
+    background: transparent;
+    color: $color-loss;
+    border: 1px solid rgba(244, 67, 54, 0.4);
+
+    &:hover:not(:disabled) {
+      background: rgba(244, 67, 54, 0.1);
+      border-color: $color-loss;
+    }
+  }
+
+  &--sm {
+    padding: 6px 14px;
+    font-size: 0.7rem;
+  }
+
+  &--icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: $radius-full;
+    font-size: 1rem;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// ─── Cards ────────────────────────────────────────────────
+.card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $sp-6;
+  box-shadow: $shadow-card;
+}
+
+// ─── Badge ────────────────────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: $radius-full;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  &--accent {
+    background: rgba(0, 229, 255, 0.12);
+    color: $color-accent;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+  }
+
+  &--orange {
+    background: rgba(255, 107, 53, 0.12);
+    color: $color-accent-2;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+  }
+
+  &--win {
+    background: rgba(76, 175, 80, 0.15);
+    color: $color-win;
+  }
+
+  &--draw {
+    background: rgba(255, 235, 59, 0.15);
+    color: $color-draw;
+  }
+
+  &--loss {
+    background: rgba(244, 67, 54, 0.15);
+    color: $color-loss;
+  }
+}
+
+// ─── Warning / Info ───────────────────────────────────────
+.alert {
+  padding: $sp-3 $sp-4;
+  border-radius: $radius-sm;
+  font-size: 0.85rem;
+
+  &--warning {
+    background: rgba(255, 235, 59, 0.08);
+    border: 1px solid rgba(255, 235, 59, 0.25);
+    color: $color-draw;
+  }
+
+  &--info {
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    color: $color-accent;
+  }
+}

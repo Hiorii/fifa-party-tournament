@@ -1,0 +1,52 @@
+// ─── Colors ───────────────────────────────────────────────
+$color-bg: #0a0a1a;
+$color-surface: #111135;
+$color-surface-2: #1a1a4e;
+$color-border: rgba(255, 255, 255, 0.08);
+$color-text: #e0e0f0;
+$color-text-muted: rgba(224, 224, 240, 0.5);
+
+// Accents
+$color-accent: #00e5ff;
+$color-accent-glow: rgba(0, 229, 255, 0.25);
+$color-accent-2: #ff6b35;
+$color-accent-2-glow: rgba(255, 107, 53, 0.25);
+$color-purple: #7b2ff7;
+
+// Consoles
+$color-console-a: #00e5ff;
+$color-console-b: #ff6b35;
+
+// Status
+$color-win: #4caf50;
+$color-draw: #ffeb3b;
+$color-loss: #f44336;
+
+// ─── Typography ───────────────────────────────────────────
+$font-display: 'Orbitron', 'Arial', sans-serif;
+$font-body: 'Inter', 'Segoe UI', sans-serif;
+
+// ─── Spacing ──────────────────────────────────────────────
+$sp-1: 4px;
+$sp-2: 8px;
+$sp-3: 12px;
+$sp-4: 16px;
+$sp-5: 20px;
+$sp-6: 24px;
+$sp-8: 32px;
+$sp-10: 40px;
+$sp-12: 48px;
+
+// ─── Border radius ────────────────────────────────────────
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-full: 9999px;
+
+// ─── Shadows ──────────────────────────────────────────────
+$shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+$shadow-accent: 0 0 24px $color-accent-glow;
+
+// ─── Breakpoints ──────────────────────────────────────────
+$bp-md: 768px;
+$bp-lg: 1024px;
