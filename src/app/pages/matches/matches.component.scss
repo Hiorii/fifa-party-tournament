@@ -81,6 +81,16 @@
     justify-items: start;
     color: $color-text-muted;
   }
+
+  &__standings {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+  }
+}
+
+.mobile-standings {
+  display: none;
 }
 
 .round {
@@ -104,5 +114,49 @@
   .matches__grid,
   .round__matches {
     grid-template-columns: 1fr;
+  }
+
+  .matches__standings {
+    display: none;
+  }
+
+  .mobile-standings {
+    position: sticky;
+    top: 72px;
+    z-index: 8;
+    display: block;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background: rgba(17, 17, 53, 0.96);
+    box-shadow: $shadow-card;
+
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $sp-3;
+      padding: $sp-3 $sp-4;
+      color: $color-text;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary span {
+      color: $color-accent;
+      font-family: $font-display;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    summary strong {
+      color: $color-accent-2;
+      font-size: 0.9rem;
+      text-align: right;
+    }
   }
 }

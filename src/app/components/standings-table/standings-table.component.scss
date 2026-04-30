@@ -1,13 +1,12 @@
 @use '../../../styles/variables' as *;
 
 .standings {
-  position: sticky;
-  top: $sp-4;
   padding: $sp-5;
   border: 1px solid $color-border;
   border-radius: $radius-md;
   background: $color-surface;
   box-shadow: $shadow-card;
+  overflow-x: auto;
 
   &__header {
     display: flex;
@@ -31,6 +30,7 @@
 
   table {
     width: 100%;
+    min-width: 330px;
     border-collapse: collapse;
     font-size: 0.88rem;
   }

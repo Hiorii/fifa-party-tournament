@@ -82,6 +82,21 @@
     }
   </section>
 
+  <details class="mobile-standings">
+    <summary>
+      <span>Live Ranking</span>
+      @if (store.standings().length) {
+        <strong>
+          #1 {{ store.standings()[0].name }}
+          {{ store.standings()[0].points }} pts
+        </strong>
+      } @else {
+        <strong>No players yet</strong>
+      }
+    </summary>
+    <app-standings-table [standings]="store.standings()" />
+  </details>
+
   <div class="matches__grid">
     <div class="matches__rounds">
       @for (round of store.rounds(); track round.iteration + '-' + round.index) {
@@ -108,6 +123,8 @@
       }
     </div>
 
-    <app-standings-table [standings]="store.standings()" />
+    <aside class="matches__standings">
+      <app-standings-table [standings]="store.standings()" />
+    </aside>
   </div>
 </section>
