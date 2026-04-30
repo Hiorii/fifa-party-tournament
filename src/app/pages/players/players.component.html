@@ -4,7 +4,7 @@
       <p class="page-header__eyebrow">Squad setup</p>
       <h1>Players</h1>
     </div>
-    <a class="btn btn--ghost" routerLink="/matches">Matches</a>
+    <a class="btn btn--ghost" routerLink="/matches">Go to Matches</a>
   </header>
 
   <div class="players__panel card">
@@ -20,7 +20,7 @@
         name="playerName"
         type="text"
         autocomplete="off"
-        placeholder="Player name"
+        placeholder="Type player name and press Enter"
         [ngModel]="name()"
         (ngModelChange)="name.set($event)"
         [disabled]="store.hasSchedule() || store.playerCount() >= requiredPlayers"
@@ -52,12 +52,16 @@
           </button>
         </li>
       } @empty {
-        <li class="players__empty">Add 8 players to generate the schedule.</li>
+        <li class="players__empty">No players yet. Add the first name above.</li>
       }
     </ol>
 
     @if (store.playerCount() !== requiredPlayers) {
-      <p class="alert alert--info">Dual 2v2 mode needs exactly 8 players.</p>
+      <p class="alert alert--info">
+        Next step: add exactly 8 players, then open Matches to generate the schedule.
+      </p>
+    } @else if (!store.hasSchedule()) {
+      <p class="alert alert--info">Ready: open Matches and generate the 2-console schedule.</p>
     }
   </div>
 </section>

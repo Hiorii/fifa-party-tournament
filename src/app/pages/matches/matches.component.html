@@ -4,12 +4,22 @@
       <p class="page-header__eyebrow">Tournament night</p>
       <h1>Matches</h1>
     </div>
-    <a class="btn btn--ghost" routerLink="/players">Players</a>
+    <a class="btn btn--ghost" routerLink="/players">Edit Players</a>
   </header>
 
   <section class="matches__controls card">
+    <p class="matches__step">
+      @if (!store.canGenerateSchedule()) {
+        Current step: add exactly 8 players.
+      } @else if (!store.hasSchedule()) {
+        Current step: choose iterations and generate the schedule.
+      } @else {
+        Current step: enter scores after each console finishes.
+      }
+    </p>
+
     <div class="matches__players">
-      <strong>Players</strong>
+      <strong>Tournament players</strong>
       <span>{{ playerList() }}</span>
     </div>
 
@@ -33,7 +43,7 @@
         [disabled]="!store.canGenerateSchedule() || store.hasSchedule()"
         (click)="store.generateSchedule()"
       >
-        Generate Schedule
+        Generate 2-Console Schedule
       </button>
       <button
         type="button"
@@ -70,7 +80,8 @@
       } @empty {
         <div class="matches__empty card">
           <h2>No schedule yet</h2>
-          <p>Set up 8 players, then generate the tournament schedule.</p>
+          <p>Set up 8 players, then use the button above to create every round.</p>
+          <a class="btn btn--primary" routerLink="/players">Set Up Players</a>
         </div>
       }
     </div>

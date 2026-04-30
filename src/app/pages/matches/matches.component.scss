@@ -9,6 +9,15 @@
     gap: $sp-4;
   }
 
+  &__step {
+    padding: $sp-3 $sp-4;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: $radius-md;
+    background: rgba(255, 107, 53, 0.08);
+    color: $color-text;
+    font-weight: 700;
+  }
+
   &__players {
     display: grid;
     gap: $sp-1;
@@ -53,6 +62,9 @@
   }
 
   &__empty {
+    display: grid;
+    gap: $sp-3;
+    justify-items: start;
     color: $color-text-muted;
   }
 }

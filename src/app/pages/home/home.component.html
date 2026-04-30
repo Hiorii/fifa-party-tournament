@@ -6,9 +6,18 @@
       Build the player list, generate balanced 2v2 rounds, enter scores, and keep
       standings live through the night.
     </p>
+    <p class="home__step">
+      @if (store.playerCount() < 8) {
+        Current step: add {{ 8 - store.playerCount() }} more player{{ 8 - store.playerCount() === 1 ? '' : 's' }}.
+      } @else if (!store.hasSchedule()) {
+        Current step: go to Matches and generate the schedule.
+      } @else {
+        Current step: enter scores as matches finish.
+      }
+    </p>
     <div class="home__actions">
-      <a class="btn btn--primary" routerLink="/players">Players</a>
-      <a class="btn btn--outline" routerLink="/matches">Matches</a>
+      <a class="btn btn--primary" routerLink="/players">Set Up Players</a>
+      <a class="btn btn--outline" routerLink="/matches">Open Match Desk</a>
     </div>
   </div>
 

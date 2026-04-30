@@ -9,17 +9,30 @@
   background: $color-surface;
   box-shadow: $shadow-card;
 
-  h2 {
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: $sp-3;
     margin-bottom: $sp-4;
+  }
+
+  h2 {
     font-family: $font-display;
     font-size: 1rem;
     color: $color-accent;
   }
 
+  &__header span,
+  &__empty {
+    color: $color-text-muted;
+    font-size: 0.8rem;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   th,
@@ -32,6 +45,11 @@
   th:nth-child(2),
   td:nth-child(2) {
     text-align: left;
+  }
+
+  td:nth-child(3) {
+    color: $color-accent;
+    font-weight: 800;
   }
 
   th {

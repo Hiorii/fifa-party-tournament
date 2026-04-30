@@ -31,6 +31,17 @@
     font-size: 1.1rem;
   }
 
+  &__step {
+    width: fit-content;
+    margin-top: $sp-5;
+    padding: $sp-3 $sp-4;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: $radius-md;
+    background: rgba(0, 229, 255, 0.08);
+    color: $color-text;
+    font-weight: 700;
+  }
+
   &__actions,
   &__status {
     display: flex;

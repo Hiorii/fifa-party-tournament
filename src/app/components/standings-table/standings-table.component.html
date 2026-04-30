@@ -1,31 +1,35 @@
 <section class="standings">
-  <h2>Standings</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Pts</th>
-        <th>W</th>
-        <th>D</th>
-        <th>L</th>
-        <th>GD</th>
-        <th>GF</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (row of standings(); track row.playerId; let i = $index) {
-        <tr [class.standings__leader]="i === 0">
-          <td>{{ i + 1 }}</td>
-          <td>{{ row.name }}</td>
-          <td>{{ row.points }}</td>
-          <td>{{ row.wins }}</td>
-          <td>{{ row.draws }}</td>
-          <td>{{ row.losses }}</td>
-          <td>{{ row.goalDifference }}</td>
-          <td>{{ row.goalsFor }}</td>
+  <div class="standings__header">
+    <h2>Live Standings</h2>
+    <span>Pts: 3 win / 1 draw</span>
+  </div>
+
+  @if (standings().length) {
+    <table>
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th>Player</th>
+          <th>Pts</th>
+          <th>W-D-L</th>
+          <th>Goals</th>
+          <th>GD</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @for (row of standings(); track row.playerId; let i = $index) {
+          <tr [class.standings__leader]="i === 0">
+            <td>{{ i + 1 }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.points }}</td>
+            <td>{{ row.wins }}-{{ row.draws }}-{{ row.losses }}</td>
+            <td>{{ row.goalsFor }}:{{ row.goalsAgainst }}</td>
+            <td>{{ row.goalDifference > 0 ? '+' : '' }}{{ row.goalDifference }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <p class="standings__empty">Add players to start the ranking table.</p>
+  }
 </section>
