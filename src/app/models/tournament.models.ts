@@ -33,6 +33,11 @@ export interface TournamentConfig {
   iterations: number;
 }
 
+export interface ConsoleNames {
+  A: string;
+  B: string;
+}
+
 export interface PlayerStats {
   playerId: PlayerId;
   name: string;
@@ -49,9 +54,11 @@ export interface PlayerStats {
 export interface TournamentState {
   players: Player[];
   config: TournamentConfig;
+  consoleNames?: ConsoleNames;
   rounds: Round[];
   version: number;
 }
 
 export const REQUIRED_PLAYERS = 8;
 export const DEFAULT_CONFIG: TournamentConfig = { mode: 'dual-2v2', iterations: 1 };
+export const DEFAULT_CONSOLE_NAMES: ConsoleNames = { A: 'Console A', B: 'Console B' };

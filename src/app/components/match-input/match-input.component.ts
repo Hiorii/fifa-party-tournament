@@ -11,6 +11,7 @@ import { Match, MatchResult, PlayerId } from '../../models/tournament.models';
 export class MatchInputComponent {
   readonly match = input.required<Match>();
   readonly playerNames = input.required<Map<PlayerId, string>>();
+  readonly consoleName = input.required<string>();
 
   readonly resultChange = output<MatchResult>();
   readonly resultClear = output<void>();

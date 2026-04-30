@@ -23,6 +23,27 @@
       <span>{{ playerList() }}</span>
     </div>
 
+    <div class="matches__console-names">
+      <label>
+        Console A name
+        <input
+          type="text"
+          [ngModel]="store.consoleNames().A"
+          (ngModelChange)="store.setConsoleName('A', $event)"
+          placeholder="Console A"
+        />
+      </label>
+      <label>
+        Console B name
+        <input
+          type="text"
+          [ngModel]="store.consoleNames().B"
+          (ngModelChange)="store.setConsoleName('B', $event)"
+          placeholder="Console B"
+        />
+      </label>
+    </div>
+
     <label>
       Iterations
       <select
@@ -71,6 +92,7 @@
               <app-match-input
                 [match]="match"
                 [playerNames]="store.playerNamesById()"
+                [consoleName]="store.consoleName(match.console)"
                 (resultChange)="store.enterResult(match.id, $event)"
                 (resultClear)="store.clearResult(match.id)"
               />

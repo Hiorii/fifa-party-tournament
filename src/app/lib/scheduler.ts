@@ -10,6 +10,7 @@ import {
 type TeamPair = [number, number];
 type MatchPattern = [TeamPair, TeamPair];
 type RoundPattern = [MatchPattern, MatchPattern];
+type ConsoleAssignment = boolean[];
 
 const BALANCED_ROUND_PATTERNS: RoundPattern[] = [
   [
@@ -110,11 +111,62 @@ function matchFromPattern(
   };
 }
 
+function playersInPattern(pattern: MatchPattern): number[] {
+  return pattern.flatMap((team) => team);
+}
+
+function scoreConsoleCounts(counts: number[], roundCount: number): number[] {
+  const target = roundCount / 2;
+  const deviations = counts.map((count) => Math.abs(count - target));
+  return [
+    Math.max(...deviations),
+    deviations.reduce((sum, deviation) => sum + deviation, 0),
+    deviations.reduce((sum, deviation, index) => sum + deviation * (REQUIRED_PLAYERS - index), 0),
+  ];
+}
+
+function isBetterScore(score: number[], bestScore: number[] | null): boolean {
+  if (!bestScore) return true;
+  for (let i = 0; i < score.length; i++) {
+    if (score[i] !== bestScore[i]) return score[i] < bestScore[i];
+  }
+  return false;
+}
+
+function buildConsoleAssignments(roundPatterns: RoundPattern[]): ConsoleAssignment {
+  const assignmentCount = 2 ** roundPatterns.length;
+  let bestAssignments: ConsoleAssignment = [];
+  let bestScore: number[] | null = null;
+
+  for (let mask = 0; mask < assignmentCount; mask++) {
+    const consoleACounts = Array(REQUIRED_PLAYERS).fill(0) as number[];
+    const assignments: ConsoleAssignment = [];
+
+    for (let roundIndex = 0; roundIndex < roundPatterns.length; roundIndex++) {
+      const swapped = Boolean(mask & (1 << roundIndex));
+      assignments.push(swapped);
+      const consoleAPattern = roundPatterns[roundIndex][swapped ? 1 : 0];
+      for (const playerIndex of playersInPattern(consoleAPattern)) {
+        consoleACounts[playerIndex]++;
+      }
+    }
+
+    const score = scoreConsoleCounts(consoleACounts, roundPatterns.length);
+    if (isBetterScore(score, bestScore)) {
+      bestScore = score;
+      bestAssignments = assignments;
+    }
+  }
+
+  return bestAssignments;
+}
+
 /**
  * Generates a balanced 8-player schedule.
  * - 7 rounds per iteration.
  * - Every teammate pair appears exactly once per iteration.
  * - Every opponent pair appears exactly twice per iteration.
+ * - The two matches in each round are assigned to consoles to balance per-player console usage.
  * - Returns [] when player count is not exactly 8.
  */
 export function generateSchedule(
@@ -124,17 +176,21 @@ export function generateSchedule(
   if (players.length !== REQUIRED_PLAYERS || !hasUniquePlayerIds(players)) return [];
 
   const rounds: Round[] = [];
+  const roundPatterns = Array.from({ length: config.iterations }, () => BALANCED_ROUND_PATTERNS).flat();
+  const consoleAssignments = buildConsoleAssignments(roundPatterns);
 
   for (let iter = 1; iter <= config.iterations; iter++) {
     for (let r = 0; r < BALANCED_ROUND_PATTERNS.length; r++) {
-      const pattern = BALANCED_ROUND_PATTERNS[r];
+      const scheduleIndex = (iter - 1) * BALANCED_ROUND_PATTERNS.length + r;
+      const pattern = roundPatterns[scheduleIndex];
+      const swapped = consoleAssignments[scheduleIndex];
       const roundId = `i${iter}r${r}`;
       rounds.push({
         index: r,
         iteration: iter,
         matches: [
-          matchFromPattern(players, pattern[0], roundId, 'A'),
-          matchFromPattern(players, pattern[1], roundId, 'B'),
+          matchFromPattern(players, pattern[swapped ? 1 : 0], roundId, 'A'),
+          matchFromPattern(players, pattern[swapped ? 0 : 1], roundId, 'B'),
         ],
       });
     }

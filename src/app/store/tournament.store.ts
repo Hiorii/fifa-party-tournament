@@ -1,6 +1,8 @@
 import { computed, Injectable, signal } from '@angular/core';
 import {
+  ConsoleNames,
   DEFAULT_CONFIG,
+  DEFAULT_CONSOLE_NAMES,
   MatchResult,
   Player,
   PlayerId,
@@ -17,6 +19,7 @@ import { StorageService } from '../lib/storage.service';
 export class TournamentStore {
   readonly players = signal<Player[]>([]);
   readonly config = signal<TournamentConfig>(DEFAULT_CONFIG);
+  readonly consoleNames = signal<ConsoleNames>(DEFAULT_CONSOLE_NAMES);
   readonly rounds = signal<Round[]>([]);
 
   readonly standings = computed(() => computeStandings(this.players(), this.rounds()));
@@ -64,6 +67,18 @@ export class TournamentStore {
     this.save();
   }
 
+  setConsoleName(consoleId: keyof ConsoleNames, name: string): void {
+    this.consoleNames.update((consoleNames) => ({
+      ...consoleNames,
+      [consoleId]: name,
+    }));
+    this.save();
+  }
+
+  consoleName(consoleId: keyof ConsoleNames): string {
+    return this.consoleNames()[consoleId].trim() || DEFAULT_CONSOLE_NAMES[consoleId];
+  }
+
   generateSchedule(): void {
     if (!this.canGenerateSchedule()) return;
     this.rounds.set(buildSchedule(this.players(), this.config()));
@@ -109,6 +124,7 @@ export class TournamentStore {
   resetAll(): void {
     this.players.set([]);
     this.config.set(DEFAULT_CONFIG);
+    this.consoleNames.set(DEFAULT_CONSOLE_NAMES);
     this.rounds.set([]);
     this.storage.clear();
   }
@@ -117,6 +133,7 @@ export class TournamentStore {
     this.storage.save({
       players: this.players(),
       config: this.config(),
+      consoleNames: this.consoleNames(),
       rounds: this.rounds(),
       version: 1,
     });
@@ -127,6 +144,7 @@ export class TournamentStore {
     if (!state || state.version !== 1) return;
     this.players.set(Array.isArray(state.players) ? state.players : []);
     this.config.set(state.config ?? DEFAULT_CONFIG);
+    this.consoleNames.set({ ...DEFAULT_CONSOLE_NAMES, ...state.consoleNames });
     this.rounds.set(Array.isArray(state.rounds) ? state.rounds : []);
   }
 
