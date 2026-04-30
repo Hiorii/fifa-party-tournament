@@ -1,0 +1,41 @@
+@use '../../../styles/variables' as *;
+
+.home {
+  display: grid;
+  gap: $sp-6;
+  min-height: calc(100vh - 120px);
+  align-content: center;
+
+  &__hero {
+    max-width: 760px;
+  }
+
+  &__eyebrow {
+    margin-bottom: $sp-3;
+    color: $color-accent;
+    font-family: $font-display;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-bottom: $sp-4;
+    font-family: $font-display;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 1;
+  }
+
+  &__copy {
+    max-width: 560px;
+    color: $color-text-muted;
+    font-size: 1.1rem;
+  }
+
+  &__actions,
+  &__status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-3;
+    margin-top: $sp-6;
+  }
+}

@@ -1,0 +1,63 @@
+<section class="players">
+  <header class="page-header">
+    <div>
+      <p class="page-header__eyebrow">Squad setup</p>
+      <h1>Players</h1>
+    </div>
+    <a class="btn btn--ghost" routerLink="/matches">Matches</a>
+  </header>
+
+  <div class="players__panel card">
+    <div class="players__topline">
+      <span class="badge badge--accent">{{ store.playerCount() }} / {{ requiredPlayers }}</span>
+      @if (store.hasSchedule()) {
+        <span class="badge badge--orange">Locked while schedule exists</span>
+      }
+    </div>
+
+    <form class="players__form" (ngSubmit)="addPlayer()">
+      <input
+        name="playerName"
+        type="text"
+        autocomplete="off"
+        placeholder="Player name"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+        [disabled]="store.hasSchedule() || store.playerCount() >= requiredPlayers"
+      />
+      <button
+        type="submit"
+        class="btn btn--primary"
+        [disabled]="store.hasSchedule() || store.playerCount() >= requiredPlayers"
+      >
+        Add
+      </button>
+    </form>
+
+    @if (error()) {
+      <p class="alert alert--warning">{{ error() }}</p>
+    }
+
+    <ol class="players__list">
+      @for (player of store.players(); track player.id; let i = $index) {
+        <li>
+          <span>{{ i + 1 }}. {{ player.name }}</span>
+          <button
+            type="button"
+            class="btn btn--danger btn--sm"
+            [disabled]="store.hasSchedule()"
+            (click)="removePlayer(player.id)"
+          >
+            Remove
+          </button>
+        </li>
+      } @empty {
+        <li class="players__empty">Add 8 players to generate the schedule.</li>
+      }
+    </ol>
+
+    @if (store.playerCount() !== requiredPlayers) {
+      <p class="alert alert--info">Dual 2v2 mode needs exactly 8 players.</p>
+    }
+  </div>
+</section>

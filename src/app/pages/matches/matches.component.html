@@ -1,0 +1,80 @@
+<section class="matches">
+  <header class="page-header">
+    <div>
+      <p class="page-header__eyebrow">Tournament night</p>
+      <h1>Matches</h1>
+    </div>
+    <a class="btn btn--ghost" routerLink="/players">Players</a>
+  </header>
+
+  <section class="matches__controls card">
+    <div class="matches__players">
+      <strong>Players</strong>
+      <span>{{ playerList() }}</span>
+    </div>
+
+    <label>
+      Iterations
+      <select
+        [ngModel]="store.config().iterations"
+        (ngModelChange)="store.setIterations($event)"
+        [disabled]="store.hasSchedule()"
+      >
+        <option [ngValue]="1">1 pass (7 rounds)</option>
+        <option [ngValue]="2">2 passes (14 rounds)</option>
+        <option [ngValue]="3">3 passes (21 rounds)</option>
+      </select>
+    </label>
+
+    <div class="matches__actions">
+      <button
+        type="button"
+        class="btn btn--primary"
+        [disabled]="!store.canGenerateSchedule() || store.hasSchedule()"
+        (click)="store.generateSchedule()"
+      >
+        Generate Schedule
+      </button>
+      <button
+        type="button"
+        class="btn btn--outline"
+        [disabled]="!store.hasSchedule()"
+        (click)="resetSchedule()"
+      >
+        Reset Schedule
+      </button>
+      <button type="button" class="btn btn--danger" (click)="resetAll()">Reset All</button>
+    </div>
+
+    @if (!store.canGenerateSchedule()) {
+      <p class="alert alert--warning">Add exactly 8 players before generating matches.</p>
+    }
+  </section>
+
+  <div class="matches__grid">
+    <div class="matches__rounds">
+      @for (round of store.rounds(); track round.iteration + '-' + round.index) {
+        <section class="round card">
+          <h2>Iteration {{ round.iteration }} / Round {{ round.index + 1 }}</h2>
+          <div class="round__matches">
+            @for (match of round.matches; track match.id) {
+              <app-match-input
+                [match]="match"
+                [playerNames]="store.playerNamesById()"
+                (resultChange)="store.enterResult(match.id, $event)"
+                (resultClear)="store.clearResult(match.id)"
+              />
+            }
+          </div>
+        </section>
+      } @empty {
+        <div class="matches__empty card">
+          <h2>No schedule yet</h2>
+          <p>Set up 8 players, then generate the tournament schedule.</p>
+        </div>
+      }
+    </div>
+
+    <app-standings-table [standings]="store.standings()" />
+  </div>
+</section>

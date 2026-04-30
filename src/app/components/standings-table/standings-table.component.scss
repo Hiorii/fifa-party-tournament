@@ -1,0 +1,47 @@
+@use '../../../styles/variables' as *;
+
+.standings {
+  position: sticky;
+  top: $sp-4;
+  padding: $sp-5;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface;
+  box-shadow: $shadow-card;
+
+  h2 {
+    margin-bottom: $sp-4;
+    font-family: $font-display;
+    font-size: 1rem;
+    color: $color-accent;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: $sp-2;
+    border-bottom: 1px solid $color-border;
+    text-align: right;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    text-align: left;
+  }
+
+  th {
+    color: $color-text-muted;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+
+  &__leader {
+    color: $color-accent-2;
+    font-weight: 700;
+  }
+}

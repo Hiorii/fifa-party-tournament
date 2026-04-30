@@ -1,0 +1,46 @@
+@use '../../../styles/variables' as *;
+
+.match {
+  display: grid;
+  gap: $sp-3;
+  padding: $sp-4;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.03);
+
+  &__console {
+    color: $color-accent;
+    font-family: $font-display;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__teams {
+    display: grid;
+    gap: $sp-2;
+  }
+
+  &__teams span {
+    color: $color-text-muted;
+    font-size: 0.8rem;
+  }
+
+  &__score {
+    display: flex;
+    align-items: center;
+    gap: $sp-2;
+  }
+
+  input {
+    width: 64px;
+    padding: $sp-2;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    background: $color-bg;
+    color: $color-text;
+    font-size: 1rem;
+    text-align: center;
+  }
+}

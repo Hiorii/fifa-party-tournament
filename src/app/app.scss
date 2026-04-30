@@ -1,0 +1,87 @@
+@use '../styles/variables' as *;
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(0, 229, 255, 0.14), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(255, 107, 53, 0.13), transparent 28rem),
+    $color-bg;
+
+  &__topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $sp-4;
+    padding: $sp-4 clamp($sp-4, 4vw, $sp-8);
+    border-bottom: 1px solid $color-border;
+    background: rgba(10, 10, 26, 0.84);
+    backdrop-filter: blur(12px);
+  }
+
+  &__brand {
+    color: $color-accent;
+    font-family: $font-display;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-2;
+  }
+
+  nav a {
+    padding: $sp-2 $sp-3;
+    border-radius: $radius-full;
+    color: $color-text-muted;
+    font-weight: 700;
+  }
+
+  nav a.is-active,
+  nav a:hover {
+    background: rgba(0, 229, 255, 0.1);
+    color: $color-accent;
+  }
+
+  &__main {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: clamp($sp-4, 4vw, $sp-8);
+  }
+}
+
+.page-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: $sp-4;
+
+  h1 {
+    font-family: $font-display;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
+  }
+
+  &__eyebrow {
+    margin-bottom: $sp-2;
+    color: $color-accent;
+    font-family: $font-display;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell__topbar,
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,33 @@
+@let currentMatch = match();
+<article class="match">
+  <div class="match__console">Console {{ currentMatch.console }}</div>
+
+  <div class="match__teams">
+    <strong>{{ homeLabel() }}</strong>
+    <span>vs</span>
+    <strong>{{ awayLabel() }}</strong>
+  </div>
+
+  <div class="match__score">
+    <input
+      type="number"
+      min="0"
+      inputmode="numeric"
+      aria-label="Home goals"
+      [ngModel]="homeGoals()"
+      (ngModelChange)="setHomeGoals($event)"
+      placeholder="0"
+    />
+    <span>:</span>
+    <input
+      type="number"
+      min="0"
+      inputmode="numeric"
+      aria-label="Away goals"
+      [ngModel]="awayGoals()"
+      (ngModelChange)="setAwayGoals($event)"
+      placeholder="0"
+    />
+    <button type="button" class="btn btn--ghost btn--sm" (click)="clear()">Clear</button>
+  </div>
+</article>

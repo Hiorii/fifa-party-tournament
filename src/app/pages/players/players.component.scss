@@ -1,0 +1,49 @@
+@use '../../../styles/variables' as *;
+
+.players {
+  display: grid;
+  gap: $sp-6;
+
+  &__panel {
+    display: grid;
+    gap: $sp-5;
+    max-width: 760px;
+  }
+
+  &__topline,
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-3;
+  }
+
+  input {
+    min-width: 240px;
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    background: $color-bg;
+    color: $color-text;
+  }
+
+  &__list {
+    display: grid;
+    gap: $sp-3;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $sp-3;
+    padding: $sp-3;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &__empty {
+    color: $color-text-muted;
+  }
+}

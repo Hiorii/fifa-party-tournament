@@ -1,0 +1,19 @@
+<section class="home">
+  <div class="home__hero">
+    <p class="home__eyebrow">2 consoles. 8 players. One loud table.</p>
+    <h1>FIFA Party Tournament</h1>
+    <p class="home__copy">
+      Build the player list, generate balanced 2v2 rounds, enter scores, and keep
+      standings live through the night.
+    </p>
+    <div class="home__actions">
+      <a class="btn btn--primary" routerLink="/players">Players</a>
+      <a class="btn btn--outline" routerLink="/matches">Matches</a>
+    </div>
+  </div>
+
+  <div class="home__status card">
+    <span class="badge badge--accent">{{ store.playerCount() }} / 8 players</span>
+    <span class="badge badge--orange">{{ store.rounds().length }} rounds</span>
+  </div>
+</section>

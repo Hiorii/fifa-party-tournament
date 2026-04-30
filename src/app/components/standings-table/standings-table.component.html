@@ -1,0 +1,31 @@
+<section class="standings">
+  <h2>Standings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Pts</th>
+        <th>W</th>
+        <th>D</th>
+        <th>L</th>
+        <th>GD</th>
+        <th>GF</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of standings(); track row.playerId; let i = $index) {
+        <tr [class.standings__leader]="i === 0">
+          <td>{{ i + 1 }}</td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.points }}</td>
+          <td>{{ row.wins }}</td>
+          <td>{{ row.draws }}</td>
+          <td>{{ row.losses }}</td>
+          <td>{{ row.goalDifference }}</td>
+          <td>{{ row.goalsFor }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
